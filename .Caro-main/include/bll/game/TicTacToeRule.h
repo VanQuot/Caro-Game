@@ -1,0 +1,4 @@
+#ifndef _TICTACTOERULE_H_
+#define _TICTACTOERULE_H_
+
+#endif // !_TICTACTOERULE_H_

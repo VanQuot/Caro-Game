@@ -1,0 +1,4 @@
+#ifndef _MOVEVALIDATOR_H_
+#define _MOVEVALIDATOR_H_
+
+#endif // !_MOVEVALIDATOR_H_

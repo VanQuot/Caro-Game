@@ -1,0 +1,4 @@
+#ifndef _GAMECONSTANTS_H_
+#define _GAMECONSTANTS_H_
+
+#endif // !_GAMECONSTANTS_H_

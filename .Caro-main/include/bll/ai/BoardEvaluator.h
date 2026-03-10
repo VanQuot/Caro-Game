@@ -1,0 +1,4 @@
+#ifndef _BOARDEVALUATOR_H_
+#define _BOARDEVALUATOR_H_
+
+#endif // !_BOARDEVALUATOR_H_
