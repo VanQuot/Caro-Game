@@ -1,0 +1,3 @@
+/workspaces/caro-game/.Caro-main/build/CMakeFiles/CaroGame.dir
+/workspaces/caro-game/.Caro-main/build/CMakeFiles/edit_cache.dir
+/workspaces/caro-game/.Caro-main/build/CMakeFiles/rebuild_cache.dir

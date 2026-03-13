@@ -1,0 +1,9 @@
+===========================================
+Thoi gian : 2026-03-13 02:43:24
+Loai game : TicTacToe (3x3)
+Che do    : PvC
+Do kho AI : Kho (Alpha-Beta)
+Nguoi choi: lado vs AI
+Ket qua   : lado thang!
+===========================================
+

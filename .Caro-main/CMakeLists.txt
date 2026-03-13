@@ -1,29 +1,54 @@
 cmake_minimum_required(VERSION 3.16)
-project(Caro-Game VERSION 1.0 LANGUAGES CXX)
+project(CaroGame CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_PREFIX_PATH "$ENV{HOME}/.local")
-set(SFML_STATIC_LIBRARIES ON)
-find_package(SFML 3 COMPONENTS Graphics Window System Audio REQUIRED)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-add_executable(${PROJECT_NAME} source/main.cpp)
+set(ROOT_DIR ${CMAKE_SOURCE_DIR})
 
-target_include_directories(${PROJECT_NAME} PRIVATE
-    source
-    source/BLL
-    source/DAL
-    source/GUI
+include_directories(${ROOT_DIR}/include)
+
+set(SOURCES
+    ${ROOT_DIR}/source/main.cpp
+
+    # Shared
+    ${ROOT_DIR}/source/shared/utils/Utils.cpp          # U hoa
+    ${ROOT_DIR}/source/shared/types/Position.cpp
+
+    # BLL - Game logic
+    ${ROOT_DIR}/source/bll/game/GomokuRule.cpp
+    ${ROOT_DIR}/source/bll/game/TicTacToeRule.cpp
+    ${ROOT_DIR}/source/bll/game/GameManager.cpp
+    ${ROOT_DIR}/source/bll/game/Player.cpp
+    ${ROOT_DIR}/source/bll/game/MoveValidator.cpp
+
+    # BLL - AI
+    ${ROOT_DIR}/source/bll/ai/BoardEvaluator.cpp
+    ${ROOT_DIR}/source/bll/ai/SimpleAI.cpp
+    ${ROOT_DIR}/source/bll/ai/MinimaxAI.cpp
+    ${ROOT_DIR}/source/bll/ai/AlphaBetaAI.cpp
+
+    # GUI
+    ${ROOT_DIR}/source/gui/GameRenderer.cpp
+    ${ROOT_DIR}/source/gui/MainWindow.cpp
+    ${ROOT_DIR}/source/gui/GameBoard.cpp
+    ${ROOT_DIR}/source/gui/ControlPanel.cpp
+
+    # DAL
+    ${ROOT_DIR}/source/dal/repositories/FileGameHistoryRepository.cpp
+    ${ROOT_DIR}/source/dal/repositories/SqliteGameHistoryRepository.cpp
+    ${ROOT_DIR}/source/dal/config/GameConfig.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    SFML::Graphics
-    SFML::Window
-    SFML::System
-    SFML::Audio
-)
+add_executable(CaroGame ${SOURCES})
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/release/bin
+add_custom_command(TARGET CaroGame POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory
+            $<TARGET_FILE_DIR:CaroGame>/data
+    COMMENT "Tao thu muc data/ cho file lich su"
 )
